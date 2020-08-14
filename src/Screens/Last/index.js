@@ -6,7 +6,7 @@ export default function LastScreen() {
     return (
         <Container colors={ ['#abd1ff', '#538bcf'] } >
             <Top>
-                <DevInfo>Aplicativo desenvolviddo por</DevInfo>
+                <DevInfo>Aplicativo desenvolvido por</DevInfo>
                 <Bold>Rodrigo Prestes</Bold>
             </Top>
             <Bottom>

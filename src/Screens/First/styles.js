@@ -19,11 +19,3 @@ export const Bold = styled.Text`
     color: #fff;
     opacity: 0.9;
 `;
-
-export const Top = styled.View`
-    margin-bottom: 5px;
-`;
-
-export const Bottom = styled.View`
-
-`;
