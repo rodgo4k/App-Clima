@@ -1,18 +1,18 @@
-/* eslint-disable prettier/prettier */
 import React from 'react';
-import { View, Text } from 'react-native';
 
-import { Container, TopBar } from './styles';
-
-import Weather from '../../components/Weather';
+import { Container, DevInfo, Bold, Top, Bottom } from './styles';
 
 export default function LastScreen() {
     return (
         <Container colors={ ['#abd1ff', '#538bcf'] } >
-            <TopBar>
-                <Weather />
-                <Text>g</Text>
-            </TopBar>
+            <Top>
+                <DevInfo>Aplicativo desenvolviddo por</DevInfo>
+                <Bold>Rodrigo Prestes</Bold>
+            </Top>
+            <Bottom>
+                <DevInfo>Um repositório contendo o projeto deste aplicativo se encontra em:</DevInfo>
+                <Bold>https://github.com/rodgo4k/App-Clima</Bold>
+            </Bottom>
         </Container>
     );
 }

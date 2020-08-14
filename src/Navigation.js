@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
@@ -26,9 +25,9 @@ export default function Navigation() {
             >
                 <Tab.Screen name="First" component={FirstScreen}
                             options={{
-                                title: 'Capitais do Brasil',
+                                title: 'Info',
                                 tabBarIcon: ({ size, color }) => (
-                                    <EntypoIcons name="location-pin" size={size} color={color} />
+                                    <EntypoIcons name="dots-three-horizontal" size={size} color={color} />
                                 ),
                             }}
                 />
@@ -42,9 +41,9 @@ export default function Navigation() {
                 />
                 <Tab.Screen name="Last" component={LastScreen}
                             options={{
-                                title: 'Capitais do Mundo',
+                                title: 'Dev',
                                 tabBarIcon: ({ size, color }) => (
-                                    <EntypoIcons name="globe" size={size} color={color} />
+                                    <EntypoIcons name="user" size={size} color={color} />
                                 ),
                             }}
                 />
