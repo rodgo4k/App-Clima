@@ -1,39 +1,23 @@
 /* eslint-disable prettier/prettier */
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios  from 'axios';
-import { View, Text, PermissionsAndroid } from 'react-native';
+import { PermissionsAndroid } from 'react-native';
 
-import { Container, WeatherMain, WeatherContainer, WeatherTemp, WeatherTempType, CityContainer, City,
-        WeatherInfo, Left, Right, Info, DescriptionContainer, Description } from './styles';
+import { Container, Loading, WeatherMain, WeatherContainer, WeatherTemp, WeatherTempType, CityContainer, City,
+        WeatherInfo, Left, Right, Info, DescriptionContainer, Description, AttButton, Att } from './styles';
 
 import Geolocation from 'react-native-geolocation-service';
 
-import getWeatherStr from '../../helpers/ApiHelpers';
-
-export default function FirstScreen() {
+export default function HomeScreen() {
 
     const [hasLocationPermission, setHasLocationPermission] = useState(false);
     const [userPosition, setUserPosition] = useState(false);
     const [weather, setWeather] = useState(false);
 
-    const lati = userPosition.lat;
-    const lon = (userPosition.lon).then(response => response.text());
+    const latitu = userPosition.lat;
+    const longitu = userPosition.lon;
 
-    const firstPartString = 'http://api.openweathermap.org/data/2.5/weather?lat=';
-    const middlePartString = '&lon=';
-    const lastPartString = '&appid=3d23291b9b2ad36032cfd244a607f2fa';
-
-    const stringString = firstPartString + lati + middlePartString + lon + lastPartString;
-
-    const weatherString = 'http://api.openweathermap.org/data/2.5/weather?lat=-25.1351135135135133&lon=-50.15462179615027&appid=3d23291b9b2ad36032cfd244a607f2fa';
-
-    // if (weather === true) {
-    //     return (
-    //       <Fragment>
-    //         <Text>Carregando o clima...</Text>
-    //       </Fragment>
-    //     )
-    // }
+    const weatherString = `http://api.openweathermap.org/data/2.5/weather?lat=${latitu}&lon=${longitu}&appid=8f3e9474879ac44bde61db21d6a82f79`;
 
     let getWeather = async (lat, long) => {
         let res = await axios.get(weatherString, {
@@ -75,7 +59,7 @@ export default function FirstScreen() {
                         lat: position.coords.latitude,
                         lon: position.coords.longitude,
                     });
-                    getWeather(setUserPosition);
+                    getWeather();
                     // setUserPosition(true);
                 },
                 error => {
@@ -87,30 +71,20 @@ export default function FirstScreen() {
 
     if (userPosition === false){
         return (
-            <View>
-                <Text>Localização não habilitada</Text>
-            </View>
+            <Container colors={ ['#abd1ff', '#538bcf'] } >
+                <Loading>Localização não habilitada</Loading>
+            </Container>
         )
     } else if (weather === false) {
         return (
-          <Fragment>
-            <Text>Carregando o clima...</Text>
-          </Fragment>
+            <Container colors={ ['#abd1ff', '#538bcf'] } >
+                <Loading>Carregando o clima...</Loading>
+                <AttButton onClick={getWeather()} >
+                    <Att>Atualizar</Att>
+                </AttButton>
+            </Container>
         )
     } else {
-        let getWeather = async (lat, long) => {
-            let res = await axios.get(weatherString, {
-              params: {
-                lat: lat,
-                lon: long,
-                appid: process.env.OPEN_WHEATHER_KEY,
-                lang: 'pt',
-                units: 'metric',
-              },
-            });
-            setWeather(res.data);
-        }
-        
         return (
             <Container colors={ ['#abd1ff', '#538bcf'] } >
                 <WeatherMain>
@@ -119,7 +93,7 @@ export default function FirstScreen() {
                         <WeatherTempType>°C</WeatherTempType>
                     </WeatherContainer>
                     <CityContainer>
-                        <City>{weather.name} {stringString}</City>
+                        <City>{weather.name}</City>
                     </CityContainer>
                 </WeatherMain>
 
@@ -139,6 +113,9 @@ export default function FirstScreen() {
                         <Info>Vento: {weather.wind.speed} km/h</Info>
                     </Right>
                 </WeatherInfo>
+                <AttButton onClick={getWeather()} >
+                    <Att>Atualizar</Att>
+                </AttButton>
             </Container>
             );
     }

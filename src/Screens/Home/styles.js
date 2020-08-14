@@ -8,6 +8,11 @@ export const Container = styled(LinearGradient)`
     justify-content: center;
 `;
 
+export const Loading = styled.Text`
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.7);
+`;
+
 export const WeatherMain = styled.View`
 
 `;
@@ -77,4 +82,20 @@ export const Right = styled.View`
 export const Info = styled.Text`
     color: #fff;
     opacity: 0.6;
+`;
+
+export const AttButton = styled.TouchableOpacity`
+    margin-top: 30px;
+    background: transparent;
+    height: 50px;
+    width: 200px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 25px;
+    align-items: center;
+    justify-content: center;
+`;
+
+export const Att = styled.Text`
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.7);
 `;

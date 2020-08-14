@@ -1,11 +1,13 @@
 /* eslint-disable prettier/prettier */
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios  from 'axios';
 import { View, Text, PermissionsAndroid } from 'react-native';
 
+import { WeatherContainer, City, WeatherShow } from './styles';
+
 import Geolocation from 'react-native-geolocation-service';
 
-export default function FirstScreen() {
+const Weather = () => {
 
     const [hasLocationPermission, setHasLocationPermission] = useState(false);
     const [userPosition, setUserPosition] = useState(false);
@@ -15,7 +17,7 @@ export default function FirstScreen() {
     const longitu = userPosition.lon;
 
     const weatherString = `http://api.openweathermap.org/data/2.5/weather?lat=${latitu}&lon=${longitu}&appid=8f3e9474879ac44bde61db21d6a82f79`;
-    
+
     let getWeather = async (lat, long) => {
         let res = await axios.get(weatherString, {
           params: {
@@ -56,7 +58,7 @@ export default function FirstScreen() {
                         lat: position.coords.latitude,
                         lon: position.coords.longitude,
                     });
-                    getWeather(setUserPosition);
+                    getWeather();
                     // setUserPosition(true);
                 },
                 error => {
@@ -74,23 +76,27 @@ export default function FirstScreen() {
         )
     } else if (weather === false) {
         return (
-          <Fragment>
-            <Text>Carregando o clima...</Text>
-          </Fragment>
+            <View>
+                <Text>Carregando o clima...</Text>
+            </View>
         )
     } else {
         return (
-            <Fragment>
-              <Text>Clima nas suas Coordenadas: {weather.weather[0].description}</Text>
-                <View>
-                    <Text>Temperatura atual: {weather.main.temp}°</Text>
-                    <Text>Sensação térmica: {weather.main.feels_like}°</Text>
-                    <Text>Pressão: {weather.main.pressure} hpa</Text>
-                    <Text>Umidade: {weather.main.humidity}%</Text>
-                    <Text>lat {userPosition.lat}</Text>
-                    <Text>lon {userPosition.lon}</Text>
-                </View>
-            </Fragment>
+          <WeatherContainer>
+            <City>{weather.name}</City>
+            <WeatherShow>{weather.main.temp}°C</WeatherShow>
+          </WeatherContainer>
             );
     }
 }
+
+// const Weather = () => {
+//     return (
+//       <WeatherContainer>
+//         <City>Ponta Grossa</City>
+//         <WeatherShow>20°C</WeatherShow>
+//       </WeatherContainer>
+//     );
+//   };
+
+export default Weather;

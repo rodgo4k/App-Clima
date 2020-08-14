@@ -26,9 +26,9 @@ export default function Navigation() {
             >
                 <Tab.Screen name="First" component={FirstScreen}
                             options={{
-                                title: 'Salvos',
+                                title: 'Capitais do Brasil',
                                 tabBarIcon: ({ size, color }) => (
-                                    <EntypoIcons name="heart" size={size} color={color} />
+                                    <EntypoIcons name="location-pin" size={size} color={color} />
                                 ),
                             }}
                 />
@@ -42,9 +42,9 @@ export default function Navigation() {
                 />
                 <Tab.Screen name="Last" component={LastScreen}
                             options={{
-                                title: 'Capitais',
+                                title: 'Capitais do Mundo',
                                 tabBarIcon: ({ size, color }) => (
-                                    <EntypoIcons name="location-pin" size={size} color={color} />
+                                    <EntypoIcons name="globe" size={size} color={color} />
                                 ),
                             }}
                 />
